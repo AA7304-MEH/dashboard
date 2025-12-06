@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "LinkedIn Repurposer",
+    "version": "1.0",
+    "description": "Repurpose any web content into LinkedIn posts with one click.",
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "action": {
+        "default_title": "Repurpose Content"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}

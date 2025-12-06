@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id
+  email     String   @unique
+  createdAt DateTime @default(now())
+  posts     Post[]
+  onboardingComplete Boolean @default(false)
+  voiceProfile      String? // JSON string
+  hookAnalyses      HookAnalysis[]
+  plan              String   @default("FREE") // FREE, PRO, BUSINESS
+  subscriptionDate  DateTime?
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  content   String
+  tone      String?
+  type      String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  hookScore Int?
+}
+
+model HookAnalysis {
+  id        String   @id @default(uuid())
+  hookText  String
+  score     Int
+  feedback  String // JSON string detailing badges and stats
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
