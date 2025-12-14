@@ -74,9 +74,9 @@ export default function HeroSection() {
                                 value={topic}
                                 onChange={(e) => setTopic(e.target.value)}
                             />
-                            <button className={styles.analyzeBtn} onClick={handleAnalyze} disabled={loading}>
-                                {loading ? '...' : 'Analyze'}
-                            </button>
+                            <a href="https://dashboard-beryl-omega.vercel.app/auth/signup" className={styles.analyzeBtn}>
+                                Test Your Hook Score
+                            </a>
                         </div>
 
                         {score !== null && (
